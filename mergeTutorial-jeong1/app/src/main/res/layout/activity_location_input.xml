@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 맨 위 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<!--원래 아이폰에 있는 버튼 모양-->
+        <!--<Button-->
+            <!--android:background="@drawable/btn"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <TextView
+            android:text="목적지 입력"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- 출발지 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="출발지"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:background="#f0f0f0"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="  Seoul Junggu dongguk university"
+            android:textSize="18sp"
+            android:layout_weight="6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- 목적지 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="목적지"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:background="#f0f0f0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="  도착지 검색"
+            android:layout_weight="5"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="검색"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="#f0f0f0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <!-- 주소 리스트뷰 레이아웃 -->
+        <ListView
+            android:id="@+id/listview_location"
+            android:choiceMode="singleChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+
+        <!-- 완료 버튼 -->
+        <Button
+            android:id="@+id/btn_input_finish"
+            android:layout_alignParentBottom="true"
+            android:text="완료"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</LinearLayout>
