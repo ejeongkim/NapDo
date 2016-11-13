@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.androidtown.listview_sample.MainActivity">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="coupon ListView"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="43dp"
+        android:onClick="onButtonClicked" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameText"
+        android:layout_marginTop="78dp"
+        android:inputType="text"
+        android:hint="enter coupon&apos;s name"
+        android:editable="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/issuedText"
+        android:hint="enter issued date"
+        android:inputType="date"
+        android:editable="true"
+        android:layout_below="@+id/nameText"
+        android:layout_alignStart="@+id/nameText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/expiredText"
+        android:hint="enter expired date"
+        android:inputType="date"
+        android:editable="true"
+        android:layout_below="@+id/issuedText"
+        android:layout_alignStart="@+id/issuedText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="INSERT DATA"
+        android:id="@+id/insertButton"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onInsertClicked" />
+
+</RelativeLayout>
