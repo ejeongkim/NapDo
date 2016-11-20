@@ -1,0 +1,66 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.androidtown.mergetutorial.HOME">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--주행 이미지 뷰-->
+        <ImageView
+            android:id="@+id/img_home"
+            android:layout_weight="8"
+            android:src="@drawable/cover"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"/>
+        <!--목적지 입력 버튼-->
+        <Button
+            android:id="@+id/btn_des"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="INPUT_DESTINATION"
+            android:textAlignment="center"
+            android:textSize="21sp"
+            android:background="@drawable/textline"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="60px"
+            android:layout_marginRight="60px"/>
+
+        <!--주행시작 버튼-->
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_weight="1"
+            android:text="START"
+            android:textAlignment="center"
+            android:textSize="21sp"
+            android:background="@drawable/textline"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="60px"
+            android:layout_marginRight="60px"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+        <!--주행거리 보여주는 테스트뷰-->
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="0 KM"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"/>
+
+    </LinearLayout>
+</FrameLayout>
