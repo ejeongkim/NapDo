@@ -39,11 +39,75 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
+            android:text="  현재 위치 출력 중.."
             android:textSize="18sp"
             android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textView" />
+            android:id="@+id/Departure" />
     </LinearLayout>
+
+    <!-- 목적지 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="목적지"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:background="#f0f0f0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <AutoCompleteTextView
+            android:hint="  도착지 검색"
+            android:inputType="textPostalAddress"
+            android:completionThreshold="1"
+            android:layout_weight="5"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Destination" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:text="검색"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="#f0f0f0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <!-- 주소 리스트뷰 레이아웃 -->
+        <ListView
+            android:id="@+id/listview_location"
+            android:choiceMode="singleChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+
+        <!-- 완료 버튼 -->
+        <Button
+            android:id="@+id/btn_input_finish"
+            android:layout_alignParentBottom="true"
+            android:text="완료"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -13,9 +13,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.location.Address;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -28,20 +35,34 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, TextWatcher{
+
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private static final int REQUEST_CODE_LOCATION = 2;
 
     private String addrmsg;
-    private TextView textView;
+    private TextView tvDeparture;
+    private AutoCompleteTextView tvDestination;
+
+    Button btn_input_finish;
+    Button btn_search;
+
+    private String item[] = {"동국대학교", "동국대학교 경주캠퍼스"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = (TextView) findViewById(R.id.textView);
+        btn_input_finish = (Button) findViewById(R.id.btn_input_finish);
+        btn_search = (Button) findViewById(R.id.btn_search);
+
+        tvDeparture = (TextView) findViewById(R.id.Departure);
+        tvDestination = (AutoCompleteTextView) findViewById(R.id.Destination);
+
+        btn_input_finish.setOnClickListener(mClickListener);
+        btn_search.setOnClickListener(mClickListener);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -49,8 +70,64 @@ public class MainActivity extends AppCompatActivity implements
                 .addApi(LocationServices.API)
                 .build();
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item); //장소 자동완성
+        tvDestination.setAdapter(adapter);
+
     }
 
+    // 버튼 클릭 리스터
+    Button.OnClickListener mClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_search:
+                    String destinationLocation= String.valueOf(tvDestination.getText()); //사용자가 입력한 목적지 받아오기
+                    SearchLocation(destinationLocation); //주소->위도,경도
+                    break;
+                case R.id.btn_input_finish:
+                    finish();
+                    break;
+
+                // TODO : 추후에 뒤로가기 및 검색 버튼 케이스 추가
+                default: break;
+            }
+        }
+
+    };
+
+
+    public void afterTextChanged(Editable arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // TODO Auto-generated method stub
+
+    }
+
+
+
+    public void SearchLocation(String location){     // 주소 -> 위도, 경도
+
+        Geocoder mGeocoder= new Geocoder(this);
+        List<Address> mListAddress;
+        Address mAddress;
+
+        String result = "";
+        try{
+            mListAddress = mGeocoder.getFromLocationName(location, 5);
+            if(mListAddress.size() > 0) {
+                mAddress = mListAddress.get(0); // 0 번째 주소값,
+                result = "lat : " + mAddress.getLatitude() + "\r\n" +"lon : " + mAddress.getLongitude()+ "\r\n" +"Address : " + mAddress.getAddressLine(0);
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(this, "위치 검색 실패", Toast.LENGTH_SHORT).show();
+        }catch(IOException e) {e.printStackTrace();}
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -141,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements
         Double longitude = location.getLongitude();
 
         addrmsg = getAddress(getApplicationContext(), latitude, longitude);
-        textView.setText(addrmsg);
+        tvDeparture.setText(addrmsg);
 
     }
 
