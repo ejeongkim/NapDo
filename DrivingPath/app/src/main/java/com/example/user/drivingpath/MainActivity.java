@@ -17,7 +17,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,26 +28,32 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, TextWatcher{
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, TextWatcher {
 
     private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
+    private LocationRequest mLocationRequest = new LocationRequest();
     private static final int REQUEST_CODE_LOCATION = 2;
 
     private String addrmsg;
     private TextView tvDeparture;
     private AutoCompleteTextView tvDestination;
 
+
+    private static final LatLngBounds mBounds = new LatLngBounds(
+            new LatLng(33.1175, 131.866667), new LatLng(38.586667, 128.2394445));
+            //new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
+
     Button btn_input_finish;
     Button btn_search;
-
-    private String item[] = {"동국대학교", "동국대학교 경주캠퍼스"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +73,13 @@ public class MainActivity extends AppCompatActivity implements
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
+                .addApi(Places.GEO_DATA_API)
                 .build();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item); //장소 자동완성
-        tvDestination.setAdapter(adapter);
+        tvDestination.setAdapter(new PlaceAutocompleteAdapter(this, mGoogleApiClient, mBounds, null));
 
     }
+
 
     // 버튼 클릭 리스터
     Button.OnClickListener mClickListener = new View.OnClickListener() {
@@ -132,12 +138,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(3000);
-        mLocationRequest.setFastestInterval(1500);
-
-
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             CheckPermission();
@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConnectionSuspended(int i) {
         mGoogleApiClient.connect();
+
     }
 
     @Override
