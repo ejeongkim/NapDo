@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    android:id="@+id/rl"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hello_world" />
+
+    <TextView
+        android:id="@+id/textLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textMessage"
+        android:text="Light"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv"
+        android:layout_below="@id/textLight"/>
+    <Button
+        android:id="@+id/btn_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ringer Mode Normal"
+        android:layout_below="@id/tv"
+        />
+    <Button
+        android:id="@+id/btn_silent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ringer Mode Silent"
+        android:layout_toRightOf="@id/btn_normal"
+        android:layout_below="@id/tv"
+        />
+    <Button
+        android:id="@+id/btn_vibrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ringer Mode Vibrate"
+        android:layout_below="@id/tv"
+        android:layout_toRightOf="@id/btn_silent"
+        />
+<TextView
+    android:id="@+id/textReversed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/btn_vibrate"
+    />
+</RelativeLayout>
