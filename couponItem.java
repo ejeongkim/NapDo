@@ -1,18 +1,20 @@
-package org.androidtown.listview_sample;
+package org.androidtown.napdo_sample;
 
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by Hyun on 2016-11-09.
+ * Created by Hyun on 2016-11-24.
+ * 각각의 쿠폰에 대한 정보를 저장 및 반환
  */
-public class couponItem {
-    private Drawable icon ;
+public class CouponItem {
+
+    private Drawable icon;
     private String couponName;
     private String issuedDate;
     private String expiredDate;
 
-    couponItem() { } ;
-    couponItem(String couponName, String issuedDate, String expiredDate) {
+    CouponItem() { } ;
+    CouponItem(String couponName, String issuedDate, String expiredDate) {
         this.couponName = couponName;
         this.issuedDate = issuedDate;
         this.expiredDate = expiredDate;
@@ -32,4 +34,5 @@ public class couponItem {
         duration = "발급일 " + issuedDate + "\n만료일 " + expiredDate;
         return duration;
     }
+
 }

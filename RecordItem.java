@@ -1,12 +1,13 @@
-package org.androidtown.recordswipe_sample;
+package org.androidtown.napdo_sample;
 
 import android.graphics.drawable.Drawable;
 
 /**
- * Created by Hyun on 2016-11-23.
+ * Created by Hyun on 2016-11-24.
  * 주행날짜와 주행거리에 대한 정보를 저장 및 반환
  */
-public class RecordItem {
+public class RecordItem  {
+
     private String drivingDate, startPoint, destinationPoint;
     private int drivingDistance;
     private Drawable mapView = null;
@@ -35,4 +36,5 @@ public class RecordItem {
     }
     public String getDrivingDate() { return this.drivingDate; }
     public Drawable getMapView() { return this.mapView; }
-}
+
+} // RecordItem class

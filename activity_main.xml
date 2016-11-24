@@ -1,60 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.androidtown.listview_sample.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:context="org.androidtown.napdo_sample.MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/container"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <!-- TabMenu의 속성 정의
+                 app:tabTextColor는 선택되지않은 Menu의 textColor
+                 app:tabSelectedTextColor는 선택된 Menu의 textColor-->
+            <android.support.design.widget.TabLayout
+                android:layout_weight="3"
+                android:id="@+id/tabs"
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@color/colorText"
+                app:tabSelectedTextColor="@color/colorPrimaryDark"/>
+        </android.support.design.widget.AppBarLayout>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="coupon ListView"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="43dp"
-        android:onClick="onButtonClicked" />
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameText"
-        android:layout_marginTop="78dp"
-        android:inputType="text"
-        android:hint="enter coupon&apos;s name"
-        android:editable="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/issuedText"
-        android:hint="enter issued date"
-        android:inputType="date"
-        android:editable="true"
-        android:layout_below="@+id/nameText"
-        android:layout_alignStart="@+id/nameText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/expiredText"
-        android:hint="enter expired date"
-        android:inputType="date"
-        android:editable="true"
-        android:layout_below="@+id/issuedText"
-        android:layout_alignStart="@+id/issuedText" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="INSERT DATA"
-        android:id="@+id/insertButton"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onInsertClicked" />
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

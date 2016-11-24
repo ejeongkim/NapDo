@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.androidtown.recordswipe_sample;
+package org.androidtown.napdo_sample;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -36,6 +36,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Swipe To Delete를 위한 TouchListener
+ * 잘 돌아가므로 보지않아도 괜찮음ㅠ_ㅠ...
  * A {@link View.OnTouchListener} that makes the list items in a {@link ListView}
  * dismissable. {@link ListView} is given special treatment because by default it handles touches
  * for its list items... i.e. it's in charge of drawing the pressed state (the list selector),

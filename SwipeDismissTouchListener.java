@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.androidtown.recordswipe_sample;
+package org.androidtown.napdo_sample;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -30,6 +30,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
+ * Swipe To Delete를 위한 TouchListener
+ * 잘 돌아가므로 보지않아도 괜찮음ㅠ_ㅠ...
  * A {@link View.OnTouchListener} that makes any {@link View} dismissable when the
  * user swipes (drags her finger) horizontally across the view.
  *
@@ -58,6 +60,7 @@ import android.widget.ListView;
  * @see SwipeDismissListViewTouchListener
  */
 public class SwipeDismissTouchListener implements View.OnTouchListener {
+
     // Cached ViewConfiguration and system-wide constant values
     private int mSlop;
     private int mMinFlingVelocity;

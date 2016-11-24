@@ -1,5 +1,6 @@
-package org.androidtown.mergetutorial;
+package org.androidtown.napdo_sample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity {
+    public static Context mContext;
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -23,16 +25,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = this;
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setCurrentItem(1, false);
 
         /* Tab의 등록 및 텍스트색과 아이콘 지정*/
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setTabTextColors(R.color.colorText, R.color.colorPrimaryDark);
+        //tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FF7FA6F4"));
+        //tabLayout.setTabTextColors(R.color.colorText, R.color.colorPrimaryDark);
         setupTabIcons();
     }
 
@@ -91,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
                 case 0:
-                    fragment = new RECORD();
+                    fragment = new Record();
                     break;
                 case 1:
-                    fragment = new HOME();
+                    fragment = new Home();
                     break;
                 case 2:
-                    fragment = new COUPON();
+                    fragment = new Coupon();
                     break;
             }
             return fragment;

@@ -1,4 +1,4 @@
-package org.androidtown.mergetutorial;
+package org.androidtown.napdo_sample;
 
 
 import android.os.Bundle;
@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HOME extends Fragment {
+public class Home extends Fragment {
 
 
-    public HOME() {  }
+    public Home() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

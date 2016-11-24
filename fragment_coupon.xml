@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.androidtown.napdo_sample.Coupon">
+
+    <!-- 사용가능한 CouponList를 나타내기 위한 Layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="COUPON"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <!-- 사용가능한 Coupon이 없는 경우 나타나는 이미지 -->
+    <ImageView
+        android:id="@+id/couponEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
+    <ListView
+        android:id="@+id/coupon_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:divider="#e7e4e4" />
+
+</LinearLayout>
