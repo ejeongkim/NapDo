@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    tools:context="org.androidtown.napdo_21.HOMERESULT">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--주행 이미지 뷰-->
+        <ImageView
+            android:id="@+id/img_home"
+            android:src="@drawable/home_img"
+            android:layout_weight="8"
+            android:layout_width="168.7dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"/>
+        <!--목적지 입력 버튼-->
+        <Button
+            android:id="@+id/btn_des"
+            android:background="@drawable/btn_input_destination"
+
+            android:layout_weight="0.85"
+            android:layout_width="140dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="20px"
+            android:layout_gravity="center"/>
+
+        <!--주행시작 버튼-->
+        <Button
+            android:id="@+id/btn_start"
+            android:background="@drawable/btn_start"
+            android:layout_weight="1"
+            android:layout_marginTop="20px"
+            android:layout_gravity="center"
+            android:layout_width="140dp"
+            android:layout_height="10dp"/>
+
+        <!--주행거리 보여주는 테스트뷰-->
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="0 KM"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"/>
+
+    </LinearLayout>
+</FrameLayout>

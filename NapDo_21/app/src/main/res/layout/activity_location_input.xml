@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 맨 위 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--원래 아이폰에 있는 버튼 모양-->
+        <!--<Button-->
+        <!--android:background="@drawable/btn"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent" />-->
+
+        <!--주행 이미지 뷰-->
+        <ImageView
+            android:src="@drawable/location_input_top"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView" />
+    </LinearLayout>
+
+    <!-- 출발지 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:background="@drawable/location_img"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20px"
+            android:layout_height="60px" />
+        <TextView
+            android:text="  현재 위치 출력 중.."
+            android:textSize="18sp"
+            android:layout_weight="6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Departure" />
+    </LinearLayout>
+
+    <!-- 목적지 레이아웃 -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_weight="0.3"
+            android:background="@drawable/destination_search_img"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20px"
+            android:layout_height="60px" />
+
+        <AutoCompleteTextView
+            android:hint="  도착지 검색"
+            android:inputType="textPostalAddress"
+            android:completionThreshold="1"
+            android:layout_weight="5"
+            android:textSize="18sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Destination" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:text="검색"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="#f0f0f0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--&lt;!&ndash; 주소 리스트뷰 레이아웃 &ndash;&gt;-->
+        <!--<ListView-->
+            <!--android:id="@+id/listview_location"-->
+            <!--android:choiceMode="singleChoice"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+        <!--</ListView>-->
+
+
+        <!-- 완료 버튼 -->
+        <Button
+            android:id="@+id/btn_input_finish"
+            android:background="@drawable/finish"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="138dp"
+            android:layout_height="45dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

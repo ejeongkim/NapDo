@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    tools:context="org.androidtown.napdo_21.RECORD">
+
+    <!-- Record를 나타내는 Layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="RECORD"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical|center_horizontal"/>
+
+    <!-- 저장된 Record가 없는 경우에 나타나는 이미지 -->
+    <ImageView
+        android:id="@+id/recordEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
+    <ExpandableListView
+        android:id="@+id/recordExList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#a3a2a2"
+        android:listSelector="#eafaea"
+        android:groupIndicator="@null"/>
+
+</LinearLayout>
