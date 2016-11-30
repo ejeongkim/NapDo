@@ -39,6 +39,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+//현재 위치 기반으로 출발지와 사용자가 도착지 입력 activity
 public class LocationInputActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, TextWatcher {
 
@@ -50,19 +51,16 @@ public class LocationInputActivity extends AppCompatActivity implements
     private TextView tvDeparture;
     private AutoCompleteTextView tvDestination;
 
-
-    public static String mCurrentAddr;
-
     private static final LatLngBounds mBounds = new LatLngBounds(
             new LatLng(33.1175, 131.866667), new LatLng(38.586667, 128.2394445)); //한국으로 Bound 설정
 
     Button btn_input_finish;
     Button btn_search;
 
-    double currentLat;
-    double currentLnt;
-    double destinationLat;
-    double destinationLnt;
+    static double currentLat;
+    static double currentLnt;
+    static double destinationLat;
+    static double destinationLnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,20 +86,20 @@ public class LocationInputActivity extends AppCompatActivity implements
         //TODO : 자동완성 API 키 문제 생긴듯
         tvDestination.setAdapter(new PlaceAutocompleteAdapter(this, mGoogleApiClient, mBounds, null)); //목적지 자동완성 adapter 붙이기
 
-    }
+    } //onCreate
 
 
     // 버튼 클릭 리스터
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_search:
+                case R.id.btn_search: //도착지 입력 버튼
                     String destinationLocation = String.valueOf(tvDestination.getText()); //사용자가 입력한 목적지 받아오기
-                    SearchLocation(destinationLocation); //주소->위도,경도
+                    SearchLocation(destinationLocation); //주소->위도,경도 (현재 위치)
                     break;
 
-                case R.id.btn_input_finish:
-                    if (destinationLnt==0 ||destinationLat==0) { //사용자가 입력을 완료하지 않으면 finish() 호출X
+                case R.id.btn_input_finish: //start 버튼
+                    if (destinationLnt==0 ||destinationLat==0) { //사용자가 도착지 입력을 완료하지 않으면 finish() 호출X
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(LocationInputActivity.this);
                         dialog.setTitle("알림");
@@ -115,7 +113,7 @@ public class LocationInputActivity extends AppCompatActivity implements
                         });
                         dialog.show();
 
-                    } else if (currentLat==0 || currentLnt==0) {
+                    } else if (currentLat==0 || currentLnt==0) { //사용자가 gps를 켜지 않아 현재 위치가 출력되지 않았다면 finish() 호출 X
                         AlertDialog.Builder dialog = new AlertDialog.Builder(LocationInputActivity.this);
                         dialog.setTitle("알림");
                         dialog.setMessage("출발지를 입력하지 않으셨습니다. \n GPS 기능을 켜주세요.");
@@ -127,7 +125,8 @@ public class LocationInputActivity extends AppCompatActivity implements
                             }
                         });
                         dialog.show();
-                    } else{
+
+                    } else{ //현재위치, 목적지가 잘 출력된다면 HOME으로
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("currentLat", currentLat);
                         resultIntent.putExtra("currentLnt", currentLnt);
@@ -144,8 +143,7 @@ public class LocationInputActivity extends AppCompatActivity implements
             }
         }
 
-    };
-
+    }; //OnClickListener
 
     public void afterTextChanged(Editable arg0) {
     }
@@ -159,14 +157,13 @@ public class LocationInputActivity extends AppCompatActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             CheckPermission();
         }
 
         startLocationUpdates();
-    }
+    } //onConnected
 
 
     private void CheckPermission() {
@@ -205,7 +202,7 @@ public class LocationInputActivity extends AppCompatActivity implements
             return;
         }
         ;
-    }
+    } //CheckPermission
 
 
     @Override
@@ -223,7 +220,7 @@ public class LocationInputActivity extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-    }
+    } //onStart
 
     @Override
     protected void onStop() {
@@ -231,7 +228,7 @@ public class LocationInputActivity extends AppCompatActivity implements
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
-    }
+    } //onStop
 
 
     @Override
@@ -243,17 +240,19 @@ public class LocationInputActivity extends AppCompatActivity implements
         addrmsg = getAddress(getApplicationContext(), latitude, longitude);
         tvDeparture.setText(addrmsg);
 
-    }
+    } //onLocationChanged
+
 
     protected void startLocationUpdates() { //FUsedLoationApi로 부터 location 정보 업데이트 하기
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            return;
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
+            return;
+        }
         chkGpsService();
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-    }
+    } //startLocationUpdates
 
     //GPS 설정 체크
     private boolean chkGpsService() {
@@ -287,10 +286,11 @@ public class LocationInputActivity extends AppCompatActivity implements
         } else {
             return true;
         }
-    }
+    } //chkGpsService
 
 
-    public String getAddress(Context mContext, double lat, double lng) { //위도, 경도 -> 주소
+    public String getAddress(Context mContext, double lat, double lng) { //위도, 경도 -> 주소 (현재 위치)
+        String nowAddress = null;
         Geocoder geocoder = new Geocoder(mContext, Locale.KOREA);
         List<Address> address;
         currentLat = lat;
@@ -299,19 +299,19 @@ public class LocationInputActivity extends AppCompatActivity implements
         try {
             if (geocoder != null) { //세번째 파라미터는 좌표에 대한 주소를 return 하는 개수, 한 좌표의 이름이 여러개 일 수 있으므로 주소배열 return하는 최대개수 설정
                 address = geocoder.getFromLocation(lat, lng, 1);
-                if (address != null && address.size() > 0) {
-                    // 현재 주소 받아오기
-                    mCurrentAddr = address.get(0).getAddressLine(0).toString();
+                if (address != null && address.size() > 0) { //주소 받아오기
+                    String currentAddr = address.get(0).getAddressLine(0).toString();
+                    nowAddress = currentAddr;
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return mCurrentAddr;
-    }
+        return nowAddress;
+    } //getAddress
 
 
-    public void SearchLocation(String location) {     // 주소 -> 위도, 경도
+    public void SearchLocation(String location) {     // 주소 -> 위도, 경도 (목적지)
 
         Geocoder mGeocoder = new Geocoder(this);
         List<Address> mListAddress;
@@ -330,6 +330,6 @@ public class LocationInputActivity extends AppCompatActivity implements
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    } //SearchLocation
 }
 

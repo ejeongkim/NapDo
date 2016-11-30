@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background">
 
     <!-- 맨 위 레이아웃 -->
     <LinearLayout
@@ -9,101 +12,92 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--원래 아이폰에 있는 버튼 모양-->
-        <!--<Button-->
-        <!--android:background="@drawable/btn"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent" />-->
-
         <!--주행 이미지 뷰-->
         <ImageView
-            android:src="@drawable/location_input_top"
-            android:layout_gravity="center"
+            android:background="@mipmap/location_input_top"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/imageView" />
+
     </LinearLayout>
 
     <!-- 출발지 레이아웃 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp" >
 
-        <Button
+        <ImageView
             android:background="@drawable/location_img"
             android:layout_weight="0.3"
-            android:layout_width="0dp"
-            android:layout_marginLeft="20px"
-            android:layout_height="60px" />
-        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp" />
+
+        <EditText
+            android:id="@+id/Departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:text="  현재 위치 출력 중.."
             android:textSize="18sp"
-            android:layout_weight="6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Departure" />
+            android:layout_weight="6"  />
+
     </LinearLayout>
 
     <!-- 목적지 레이아웃 -->
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp" >
 
-        <Button
-            android:layout_weight="0.3"
+        <ImageView
             android:background="@drawable/destination_search_img"
-            android:layout_width="0dp"
-            android:layout_marginLeft="20px"
-            android:layout_height="60px" />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="20px" />
 
         <AutoCompleteTextView
             android:hint="  도착지 검색"
             android:inputType="textPostalAddress"
             android:completionThreshold="1"
-            android:layout_weight="5"
+            android:layout_weight="4.64"
             android:textSize="18sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/Destination" />
+            android:id="@+id/Destination" >
+
+        <requestFocus/>
+
+        </AutoCompleteTextView>
 
         <Button
             android:id="@+id/btn_search"
             android:text="검색"
             android:textSize="18sp"
-            android:layout_weight="1"
             android:textAlignment="center"
             android:background="#f0f0f0"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="4dp"
+            android:layout_height="37dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="0.90" />
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--&lt;!&ndash; 주소 리스트뷰 레이아웃 &ndash;&gt;-->
-        <!--<ListView-->
-            <!--android:id="@+id/listview_location"-->
-            <!--android:choiceMode="singleChoice"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-        <!--</ListView>-->
-
-
-        <!-- 완료 버튼 -->
-        <Button
-            android:id="@+id/btn_input_finish"
-            android:background="@drawable/finish"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="138dp"
-            android:layout_height="45dp" />
-
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_input_finish"
+        android:background="@drawable/finish"
+        android:layout_centerHorizontal="true"
+        android:layout_width="138dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp" />
 
 </LinearLayout>

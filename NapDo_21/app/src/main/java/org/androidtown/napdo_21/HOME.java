@@ -1,9 +1,17 @@
 package org.androidtown.napdo_21;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +22,6 @@ import android.widget.ImageView;
 import static android.app.Activity.RESULT_OK;
 import static org.androidtown.napdo_21.R.id.btn_des;
 
-/**
- * Created by ejeong on 2016-11-08.
- */
 // HOME 화면 Activity
 public class HOME extends Fragment {
 
@@ -27,6 +32,12 @@ public class HOME extends Fragment {
 
     Button mBtnStart;
     Button mBtnDesti;
+
+    SensorManager mSensorMgr = null;
+    AudioManager mAudioManager;
+
+
+    Boolean isInput = false;
 
     // onCraet() 다음에 호출되는 함수를 overriding
     @Override
@@ -42,6 +53,7 @@ public class HOME extends Fragment {
         mBtnStart.setOnClickListener(mClickListener);
         mBtnDesti.setOnClickListener(mClickListener);
 
+
         return v;
     }
 
@@ -52,7 +64,7 @@ public class HOME extends Fragment {
                 // 목적지 입력 버튼 누를 경우, 해당 액티비티로 변환
                 case btn_des:
                     //TODO : 목적지 입력 완료시 버튼 이미지 변경 해야해
-                    //v.setSelected(true);
+                    isInput = true;
                     mBtnDesti.setBackground(v.getResources().getDrawable(R.drawable.btn_input_destination_finish));
 
                     //btn_des.setSelected(true);
@@ -62,12 +74,31 @@ public class HOME extends Fragment {
                     break;
                 // 시작 버튼 누를 경우, HOMERESULT fragment 변환
                 case R.id.btn_start:
-                    mFragmentHomeResult = new HOMERESULT();
-                    // TODO : getChildFragmentManager하는 이유 찾기
-                    MainActivity.mFragmentManager = getChildFragmentManager();
-                    // Framgent 변환
-                    getChildFragmentManager().beginTransaction().add(R.id.fragment_home, mFragmentHomeResult).addToBackStack(null).commit();
+                    if (isInput == false) { //목적지 입력 안 되어 있을 때
+                        Dialog dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.popup_no_input_destination);
 
+                        ImageView iv = (ImageView) dialog.findViewById(R.id.popup_no_input);
+                        iv.setImageResource(R.drawable.not_input_destination_img);
+                        iv.getMaxHeight();
+                        iv.getMaxWidth();
+
+                        dialog.show();
+                    }
+
+                    else{  //목적지 입력후 start 버튼 눌렀을 때.
+                        // 다이얼러그 위치 nMapviewer로 옮김
+
+                        //HOMERESULT fragment로 이동
+                        mFragmentHomeResult = new HOMERESULT();
+                        // TODO : getChildFragmentManager하는 이유 찾기
+                        FragmentManager mFragmentManager = getChildFragmentManager();
+                        // Framgent 변환
+                        getChildFragmentManager().beginTransaction().add(R.id.fragment_home, mFragmentHomeResult).addToBackStack(null).commit();
+
+                        // 목적지 입력 버튼 못 눌리게 하기
+                        mBtnDesti.setEnabled(false);
+                    }
                     // <<FragmentTransaction 설명>>
                     // Fragment 삭제
                     //getChildFragmentManager().beginTransaction().remove(fragment).addToBackStack(null).commit();
@@ -82,20 +113,24 @@ public class HOME extends Fragment {
                     // addToBackStack을 하는 이유
                     // fragment stack에 쌓여서 fragment replace 후,
                     // back key를 눌러도 이전엥 fragment가 지워지지 않는다.
+//
 
                     break;
             }
         }
     };
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                //btn_des.setSelected("true");
 
-            }
-
-        }
-    }
 }
+
+//
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_CODE) {
+//            if (resultCode == RESULT_OK) {
+//                //btn_des.setSelected("true");
+//
+//            }
+//
+//        }
+//    }

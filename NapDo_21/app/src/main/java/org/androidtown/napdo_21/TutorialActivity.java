@@ -14,15 +14,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class TutorialActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private LinearLayout dotsLayout;
-    private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
     private PrefManager prefManager;
@@ -50,7 +46,6 @@ public class TutorialActivity extends AppCompatActivity {
 
         // tutorial을 위한 객체 초기화
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
 
@@ -105,14 +100,14 @@ public class TutorialActivity extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
 
-            // changing the next button text 'NEXT' / 'GOT IT'
+            // changing the next button text 'NEXT' / 'START'
             if (position == layouts.length - 1) {
-                // last page. make button text to GOT IT
-                btnNext.setText(getString(R.string.start));
+                // last page. make button text to START
+                btnNext.setBackgroundResource(R.mipmap.tutorial_start);
                 btnSkip.setVisibility(View.GONE);
             } else {
                 // still pages are left
-                btnNext.setText(getString(R.string.next));
+                btnNext.setBackgroundResource(R.mipmap.tutorial_next);
                 btnSkip.setVisibility(View.VISIBLE);
             }
         }

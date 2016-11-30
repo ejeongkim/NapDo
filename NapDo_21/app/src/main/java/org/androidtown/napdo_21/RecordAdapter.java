@@ -96,7 +96,7 @@ public class RecordAdapter extends BaseExpandableListAdapter {
         RecordItem record = getGroup(groupPosition);
 
         // 선택된 record로부터 주행 정보를 받아옴
-        int distance = record.getDrivingDistance();
+        String distance = record.getDrivingDistance();
         String path = record.getDrivingPath();
         String date = record.getDrivingDate();
 

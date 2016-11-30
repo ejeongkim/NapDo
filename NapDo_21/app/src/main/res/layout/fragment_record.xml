@@ -7,14 +7,10 @@
     tools:context="org.androidtown.napdo_21.RECORD">
 
     <!-- Record를 나타내는 Layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="RECORD"
-        android:paddingTop="20dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical|center_horizontal"/>
+        android:layout_height="50dp"
+        android:background="@mipmap/uppermenu_record"/>
 
     <!-- 저장된 Record가 없는 경우에 나타나는 이미지 -->
     <ImageView

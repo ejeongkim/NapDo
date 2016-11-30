@@ -82,7 +82,7 @@ public class COUPON extends Fragment implements CouponAdapter.ListBtnClickListen
             // Use button 클릭 시의 설정
             public void onClick(DialogInterface dialog, int whichButton){
                 // 선택된 coupon의 정보를 이용하여 LocalDatabase에 존재하는 해당 coupon의 정보를 삭제한다.
-                deleteCouponItemsFromDB(position);
+                DBCoupon.delete(position);
                 Toast.makeText(mContext, "쿠폰이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
 
                 // 쿠폰 아이템 추가 및 갱신
@@ -116,18 +116,12 @@ public class COUPON extends Fragment implements CouponAdapter.ListBtnClickListen
 //        System.out.println("====System.out.number : " + Utility.couponNum);
         for (int i = 1; i<= Utility.couponNum; i++){
 
-            DBController mDbController = new DBController();    // DBController 변수 생성
-            mDbController.setParam("PARAM", Integer.toString(i));
-            mDbController.connect("http://napdo.dothome.co.kr/coupon.php");
-
-            String odate = mDbController.getResult("odate");
-            String edate = mDbController.getResult("edate");
-
-//            Toast.makeText(mContext,"=====result : " + odate,Toast.LENGTH_SHORT).show();
+            String res = DBCoupon.select(i);
+            String[] item = res.split(",");
 
             // 삭제된 아이템이면 건너뛰
-//            if(odate == "") continue;
-            CouponItem couponItem = new CouponItem(odate, edate);
+            if(item[0].equals(" ")) continue;
+            CouponItem couponItem = new CouponItem(item[0], item[1]);
             mCouponList.add(couponItem);
         }
 
@@ -137,28 +131,9 @@ public class COUPON extends Fragment implements CouponAdapter.ListBtnClickListen
 //        if(mIsLoaded == true)
 //            mAdapter.notifyDataSetChanged();
 
-        setBackground();
+        // 아이템 없으면 배경 바꿈
+        if(mCouponList.isEmpty()) Utility.setIVBackground(mBackground);
         // --------------------------------------------------------------------------------
-    }
-
-    // ejeong -
-    public void deleteCouponItemsFromDB(int position){
-        DBController mDbController = new DBController();    // DBController 변수 생성
-        mDbController.setParam("PARAM", Integer.toString(position+1));
-        mDbController.connect("http://napdo.dothome.co.kr/couponDelete.php");
-
-        String result = mDbController.getResult("res");
-
-//        Toast.makeText(mContext,"=====result : " + result,Toast.LENGTH_SHORT).show();
-    }
-
-    // coupon item이 없으면 fragment 배경을 empty image로 변환
-    public void setBackground(){
-        if(mCouponList.isEmpty()) {
-            // 바꿀것!
-            mBackground.setImageResource(R.mipmap.ic_launcher);
-            mBackground.setVisibility(View.VISIBLE);
-        }
     }
 
 } // COUPON

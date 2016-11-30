@@ -1,15 +1,53 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ffffff"
+    android:id="@+id/fragment_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context="org.androidtown.napdo_21.HOMERESULT">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--주행 이미지 뷰-->
+        <ImageView
+            android:id="@+id/map_screenshot"
+            android:src="@drawable/laptop"
+            android:layout_width="215dp"
+            android:layout_height="252dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"/>
+
+        <!-- 10KM 주행거리 성공 실패 여부 -->
+        <TextView
+            android:id="@+id/text_result"
+            android:text="changed text"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="14.7sp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"/>
+
+        <!--주행거리 보여주는 테스트뷰-->
+        <TextView
+            android:id="@+id/sum_of_distance"
+            android:text="defualt임니다"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textAlignment="center"
+            android:textSize="40sp"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"/>
 
     </LinearLayout>
 

@@ -4,6 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
     android:paddingTop="15dp"
     android:paddingBottom="15dp">
 
@@ -35,6 +37,7 @@
         android:layout_marginTop="4.5dp"
         android:layout_marginRight="20dp"
         android:gravity="center_vertical|center_horizontal"
-        android:background="@drawable/coupon_usebutton"/>
+        android:background="@drawable/coupon_usebutton"
+        android:nestedScrollingEnabled="true" />
 
 </LinearLayout>

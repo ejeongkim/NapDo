@@ -35,8 +35,10 @@
                 android:background="#414c59"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabTextColor="@color/colorText"
-                app:tabSelectedTextColor="@color/colorPrimaryDark"/>
+                app:tabTextColor="#76828e"
+                app:tabSelectedTextColor="#eaf3f3"
+                app:tabIndicatorColor="#526271"/>
+
         </android.support.design.widget.AppBarLayout>
 
     </LinearLayout>

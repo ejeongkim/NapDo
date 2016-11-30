@@ -16,30 +16,30 @@
         <ImageView
             android:id="@+id/img_home"
             android:src="@drawable/home_img"
-            android:layout_weight="8"
-            android:layout_width="168.7dp"
-            android:layout_height="0dp"
+            android:layout_width="215dp"
+            android:layout_height="252dp"
+            android:layout_marginTop="30dp"
             android:layout_gravity="center"/>
+
         <!--목적지 입력 버튼-->
         <Button
             android:id="@+id/btn_des"
-            android:background="@drawable/btn_input_destination"
-
-            android:layout_weight="0.85"
-            android:layout_width="140dp"
+            android:layout_width="173dp"
             android:layout_height="10dp"
-            android:layout_marginTop="20px"
+            android:background="@drawable/btn_input_destination"
+            android:layout_weight="0.85"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"/>
 
         <!--주행시작 버튼-->
         <Button
             android:id="@+id/btn_start"
+            android:layout_width="173dp"
+            android:layout_height="10dp"
             android:background="@drawable/btn_start"
             android:layout_weight="1"
             android:layout_marginTop="20px"
-            android:layout_gravity="center"
-            android:layout_width="140dp"
-            android:layout_height="10dp"/>
+            android:layout_gravity="center" />
 
         <!--주행거리 보여주는 테스트뷰-->
         <TextView
@@ -55,4 +55,5 @@
             android:layout_marginRight="80px"/>
 
     </LinearLayout>
+
 </FrameLayout>

@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout tabLayout;
 
-    final int[] tabIcons = new int[]{ R.mipmap.tab_record, R.mipmap.tab_home, R.mipmap.present_img };
+    final int[] selectedIcons = new int[] { R.drawable.select_record, R.drawable.select_home, R.drawable.select_coupon };
+    final int[] unselectedIcons = new int[] { R.drawable.unselect_record, R.drawable.unselect_home, R.drawable.unselect_coupon };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // -----------------------------------------------------
         // ejeong - Driving record, Coupon item의 갯수를 초기화한다.
         Utility.setCouponNum();
-        Utility.setCouponNum();
+        Utility.setRecordNum();
         // -----------------------------------------------------
 
         startActivity(new Intent(this, SplashActivity.class)); //로딩화면(Splash) 띄우기
@@ -48,15 +49,40 @@ public class MainActivity extends AppCompatActivity {
         /* Tab의 등록 및 텍스트색과 아이콘 지정*/
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        setupTabIcons();
-    }
+        tabLayout.setOnTabSelectedListener(onTabSelectedListener(mViewPager));
 
-    private void setupTabIcons() {
-        // 각 탭의 아이콘 설정
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-    }
+        tabLayout.getTabAt(0).setIcon(unselectedIcons[0]);
+        tabLayout.getTabAt(1).setIcon(selectedIcons[1]);
+        tabLayout.getTabAt(2).setIcon(unselectedIcons[2]);
+
+    } // onCreate()
+
+    private TabLayout.OnTabSelectedListener onTabSelectedListener(final ViewPager viewPager) {
+
+        return new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int select = tab.getPosition();
+
+                for(int i=0;i<3;i++) {
+                    if (i != select)
+                        tabLayout.getTabAt(i).setIcon(unselectedIcons[i]);
+                    else
+                        tabLayout.getTabAt(i).setIcon(selectedIcons[i]);
+                } // for
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        };
+    } // TabLayout.OnTabSelectedListener
 
     /**
      * A placeholder fragment containing a simple view.
@@ -100,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
+
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
@@ -128,11 +155,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "RECORD";
+                    return "주행기록";
                 case 1:
-                    return "HOME";
+                    return "홈";
                 case 2:
-                    return "COUPON";
+                    return "선물함";
             }
             return null;
         }

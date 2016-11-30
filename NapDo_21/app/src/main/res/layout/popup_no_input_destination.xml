@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="335dp"
+    android:layout_height="202dp"
+    android:background="@drawable/not_input_destination_img">
+
+
+    <ImageView
+        android:id="@+id/popup_no_input"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:layout_width="335dp"
+        android:layout_height="202dp"
+        android:src="@drawable/not_input_destination_img" />
+
+</LinearLayout>

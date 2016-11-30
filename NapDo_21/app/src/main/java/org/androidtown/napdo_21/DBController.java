@@ -17,20 +17,21 @@ import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
 
-        import org.apache.http.NameValuePair;
-        import org.apache.http.client.HttpClient;
-        import org.apache.http.client.ResponseHandler;
-        import org.apache.http.client.methods.HttpGet;
-        import org.apache.http.client.utils.URLEncodedUtils;
-        import org.apache.http.impl.client.BasicResponseHandler;
-        import org.apache.http.impl.client.DefaultHttpClient;
-        import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 /**
  * Created by ejeong on 2016-11-26.
  */
 
 /* 이정 남은 부분 - 데이터가 없을 때, 백그라운드를 바꾼다 */
+    // 데이터 남은 부분을 바꾼다
 public class DBController {
 
     private Vector<NameValuePair> v_para_arr;    //php에 보낼 변수
@@ -77,7 +78,7 @@ public class DBController {
     }
 
 
-    //사용자 지정명의 데이터를 파싱하고자 할때,
+    //데이터 파싱
     public String getResult(String s_name) {
 
         if(jsonobject == null){
@@ -101,18 +102,6 @@ public class DBController {
         }
 
         return s_value;
-    }
-
-    public boolean setNextData() {
-        if(++n_parser_cnt < Json_item.length()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public String getResult() {
-        return s_result;
     }
 
 
@@ -143,38 +132,5 @@ public class DBController {
         }
     }
 
-    public void getData(String url){
-        class GetDataJSON extends AsyncTask<String, Void, String>{
 
-            @Override
-            protected String doInBackground(String... params) {
-
-                String uri = params[0];
-
-                BufferedReader bufferedReader = null;
-                try {
-                    URL url = new URL(uri);
-                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                    StringBuilder sb = new StringBuilder();
-
-                    bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                    String json;
-                    while((json = bufferedReader.readLine())!= null){
-                        sb.append(json+"\n");
-                    }
-                    return sb.toString().trim();
-                }catch(Exception e){
-                    return "error";
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String result){
-                s_result=result;
-            }
-        }
-        GetDataJSON g = new GetDataJSON();
-        g.execute(url);
-    }
 }

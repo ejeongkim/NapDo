@@ -1,5 +1,10 @@
 package org.androidtown.napdo_21;
 
+import android.view.View;
+import android.widget.ImageView;
+
+import java.util.Calendar;
+
 /**
  * Created by user on 2016-11-28.
  */
@@ -8,6 +13,8 @@ package org.androidtown.napdo_21;
 public class Utility {
     public static int recordNum;    // record item 갯수
     public static int couponNum;    // coupon item 갯수
+    public static int increasedDNum=0; // 추가된 Driving 아이템 갯수
+    public static int increasedCNum=0; // 추가된 Coupon 아이템 갯수
 
     public static void setRecordNum(){
         DBController dbManager = new DBController();
@@ -36,5 +43,25 @@ public class Utility {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) { }
+    }
+
+    // 날짜 반환 : yyyy-mm-dd 형식
+    public static String getDate(){
+        Calendar ci = Calendar.getInstance();
+
+        String CiDateTime = "" + ci.get(Calendar.YEAR) + "-" +
+                (ci.get(Calendar.MONTH) + 1) + "-" +
+                ci.get(Calendar.DAY_OF_MONTH);
+
+        System.out.println("====result date : "+CiDateTime);
+
+        return CiDateTime;
+    }
+
+    // coupon item이 없으면 fragment 배경을 empty image로 변환
+    public static void setIVBackground(ImageView iv){
+        // 바꿀것!
+        iv.setImageResource(R.mipmap.ic_launcher);
+        iv.setVisibility(View.VISIBLE);
     }
 }
